@@ -1,0 +1,16 @@
+---
+:source:
+  :path: test
+  :file: test_Blinker.c
+:successes: []
+:failures:
+- :test: test_Blinker_should_toggle_light_if_alarm_is_expired
+  :line: 15
+  :message: Function 'Alarm_IsExpired' called less times than expected.
+:ignores: []
+:counts:
+  :total: 1
+  :passed: 0
+  :failed: 1
+  :ignored: 0
+:stdout: []

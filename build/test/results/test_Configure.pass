@@ -1,0 +1,16 @@
+---
+:source:
+  :path: test
+  :file: test_Configure.c
+:successes:
+- :test: test_Configure_should_setup_timer_and_port
+  :line: 14
+  :message: ''
+:failures: []
+:ignores: []
+:counts:
+  :total: 1
+  :passed: 1
+  :failed: 0
+  :ignored: 0
+:stdout: []
