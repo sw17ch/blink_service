@@ -17,17 +17,14 @@ void Alarm_Start(Alarm_t * alarm)
 
 void Alarm_Reset(Alarm_t * alarm)
 {
-  if (!alarm->started)
-  {
-    Alarm_Start(alarm);
-  }
-  else
-  {
-    alarm->started_at += alarm->duration;
-  }
+  Alarm_Start(alarm);
 }
 
 bool Alarm_IsExpired(Alarm_t * alarm)
 {
-  return (Clock_Get() - alarm->started_at) >= alarm->duration;
+  Clock_Val_t c = Clock_Get();
+  Clock_Val_t diff = c - alarm->started_at;
+  bool expired = diff > alarm->duration;
+
+  return expired;
 }

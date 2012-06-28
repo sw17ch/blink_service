@@ -1,13 +1,5 @@
 #include "Blinker_LED.h"
 
-#if 0
-void BlinkTask(void)
-{
-  /* toggle the LED */
-  PORTB ^= _BV(PORTB5);
-}
-#endif
-
 void Blinker_LED_Init(Blinker_LED_t * led, Port_t port, uint8_t pin)
 {
   led->port = port;

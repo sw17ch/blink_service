@@ -14,8 +14,9 @@ void tearDown(void) { }
 
 void test_Blinker_Init(void)
 {
-  // Weird casting to handle differnces between host and target
   Blinker_LED_Init_Expect(&blinker.led, &PORTB, PORTB5);
+  Alarm_Init_Expect(&blinker.alarm, 500);
+  Alarm_Start_Expect(&blinker.alarm);
 
   Blinker_Init(&blinker);
 }
@@ -24,6 +25,7 @@ void test_Blinker_should_toggle_light_if_alarm_is_expired(void)
 {
   Alarm_IsExpired_ExpectAndReturn(&blinker.alarm, true);
   Blinker_LED_Toggle_Expect(&blinker.led);
+  Alarm_Reset_Expect(&blinker.alarm);
 
   Blinker_Service(&blinker);
 }
