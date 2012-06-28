@@ -15,7 +15,7 @@ void tearDown(void) { }
 void test_Blinker_Init(void)
 {
   Blinker_LED_Init_Expect(&blinker.led, &PORTB, PORTB5);
-  Alarm_Init_Expect(&blinker.alarm, 500);
+  Alarm_Init_Expect(&blinker.alarm, 1000);
   Alarm_Start_Expect(&blinker.alarm);
 
   Blinker_Init(&blinker);
