@@ -7,6 +7,7 @@
 typedef struct {
   Clock_Val_t duration;
   Clock_Val_t started_at;
+  bool started;
 } Alarm_t;
 
 /**
@@ -22,8 +23,7 @@ void Alarm_Start(Alarm_t * alarm);
 
 /**
  * Resets the alarm. Alarm will expire `duration` ticks from the time the alarm
- * first expired. If the alarm was never started, it will expire `duration`
- * ticks from now.
+ * expired. If the alarm was never started, it behaves like Alarm_Start.
  */
 void Alarm_Reset(Alarm_t * alarm);
 
