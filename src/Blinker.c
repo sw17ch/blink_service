@@ -8,7 +8,7 @@ void Blinker_Init(Blinker_t * blinker)
   Alarm_t * alarm = &(blinker->alarm);
 
   Blinker_LED_Init(&blinker->led, &PORTB, PORTB5);
-  Alarm_Init(alarm, 500);
+  Alarm_Init(alarm, 1000);
   Alarm_Start(alarm);
 }
 
