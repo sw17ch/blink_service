@@ -54,11 +54,6 @@ void test_Blinker_Service_should_reinit_alarm_if_interval_updated(void)
   TEST_ASSERT_EQUAL(false, blinker.reinit_alarm);
 }
 
-void test_Blinker_Service_should_change_the_alarm_interval_if_it_changed(void)
-{
-  TEST_IGNORE_MESSAGE("Implement me please!");
-}
-
 void test_Blinker_UpdateInterval_should_change_the_interval(void)
 {
   blinker.interval = 45;

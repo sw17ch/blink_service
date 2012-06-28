@@ -1,9 +1,15 @@
 #include "unity.h"
+#include "Serial.h"
 
-void setUp(void) {}
+#include <string.h>
+
+Serial_t serial;
+
+void setUp(void) {memset(&serial, 0, sizeof(serial));}
 void tearDown(void) {}
 
-void test_implement_me(void)
+void test_Serial_Init(void)
 {
-  TEST_IGNORE_MESSAGE("Implement me please!");
+  Serial_Init(&serial, 70);
+  TEST_ASSERT_EQUAL(70, serial.port);
 }
