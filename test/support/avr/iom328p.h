@@ -62,7 +62,7 @@
 // #define PINB7 7
 
 // #define DDRB _SFR_IO8(0x04)
-char DDRB;
+uint8_t DDRB;
 #define DDB0 0
 #define DDB1 1
 #define DDB2 2
@@ -73,7 +73,7 @@ char DDRB;
 #define DDB7 7
 
 // #define PORTB _SFR_IO8(0x05)
-char PORTB;
+uint8_t PORTB;
 #define PORTB0 0
 #define PORTB1 1
 #define PORTB2 2
@@ -111,7 +111,7 @@ char PORTB;
 // #define PORTC6 6
 
 // #define PIND _SFR_IO8(0x09)
-char PIND;
+uint8_t PIND;
 #define PIND0 0
 #define PIND1 1
 #define PIND2 2
@@ -122,7 +122,7 @@ char PIND;
 #define PIND7 7
 
 // #define DDRD _SFR_IO8(0x0A)
-char DDRD;
+uint8_t DDRD;
 #define DDD0 0
 #define DDD1 1
 #define DDD2 2
@@ -133,7 +133,7 @@ char DDRD;
 #define DDD7 7
 
 // #define PORTD _SFR_IO8(0x0B)
-char PORTD;
+uint8_t PORTD;
 #define PORTD0 0
 #define PORTD1 1
 #define PORTD2 2
@@ -232,7 +232,7 @@ char PORTD;
 // #define COM0A1 7
 
 // #define TCCR0B _SFR_IO8(0x25)
-char TCCR0B;
+uint8_t TCCR0B;
 #define CS00 0
 #define CS01 1
 #define CS02 2
@@ -241,7 +241,7 @@ char TCCR0B;
 #define FOC0A 7
 
 // #define TCNT0 _SFR_IO8(0x26)
-char TCNT0;
+uint8_t TCNT0;
 #define TCNT0_0 0
 #define TCNT0_1 1
 #define TCNT0_2 2
@@ -431,7 +431,7 @@ char TCNT0;
 // #define PCINT23 7
 
 // #define TIMSK0 _SFR_MEM8(0x6E)
-char TIMSK0;
+uint8_t TIMSK0;
 #define TOIE0 0
 #define OCIE0A 1
 #define OCIE0B 2

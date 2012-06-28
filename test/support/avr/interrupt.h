@@ -120,13 +120,14 @@ static void cli(void) {}; // Redefine the macro as a function so that it can be 
 // #endif
 
 // #ifdef __cplusplus
-// #  define ISR(vector, ...)            \
-//     extern "C" void vector (void) __attribute__ ((signal,__INTR_ATTRS)) __VA_ARGS__; \
-//     void vector (void)
-// #else
-// #  define ISR(vector, ...)            \
-//     void vector (void) __attribute__ ((signal,__INTR_ATTRS)) __VA_ARGS__; \
-//     void vector (void)
+#if 0
+#  define ISR(vector, ...)            \
+    extern "C" void vector (void) __attribute__ ((signal,__INTR_ATTRS)) __VA_ARGS__; \
+    void vector (void)
+#  define ISR(vector, ...)            \
+    void vector (void) __attribute__ ((signal,__INTR_ATTRS)) __VA_ARGS__; \
+    void vector (void)
+#endif
 // #endif
 
 // #endif /* DOXYGEN */

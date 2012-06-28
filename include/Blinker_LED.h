@@ -11,6 +11,7 @@ typedef struct {
   uint8_t pin;
 } Blinker_LED_t;
 
+void Blinker_LED_Init(Blinker_LED_t * led, Port_t port, uint8_t pin);
 void Blinker_LED_Toggle(Blinker_LED_t * led);
 
 #endif // Blinker_LED_H

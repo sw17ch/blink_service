@@ -1,15 +1,17 @@
+#include <string.h>
+
 #include "unity.h"
 #include "Initialize.h"
+#include "mock_ProcessTasks.h"
 
-void setUp(void)
-{
-}
+ProcessTasks_t process_tasks;
 
-void tearDown(void)
-{
-}
+void setUp(void) { memset(&process_tasks, 0, sizeof(process_tasks)); }
+void tearDown(void) { }
 
-void test_module_generator_needs_to_be_implemented(void)
+void test_Initialize(void)
 {
-	TEST_IGNORE_MESSAGE("Implement me!");
+  ProcessTasks_Init_Expect(&process_tasks);
+
+  Initialize(&process_tasks);
 }

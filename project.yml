@@ -46,7 +46,8 @@
   # in order to add common defines:
   #  1) remove the trailing [] from the :common: section
   #  2) add entries to the :common: section (e.g. :test: has TEST defined)
-  :commmon: &common_defines []
+  :commmon: &common_defines
+    - TARGET
   :test:
     - *common_defines
     - TEST
@@ -63,7 +64,6 @@
       - -D"$": COLLECTION_DEFINES_RELEASE_AND_VENDOR
       - -D"$": DEFINES_RELEASE_PREPROCESS
       - ${1}
-      - -DTARGET
       - -DF_CPU=#{ENV['F_CPU']}
       - -mmcu=#{ENV['MCU']}
       - -Wall
@@ -76,6 +76,17 @@
       - -mmcu=#{ENV['MCU']}
       - ${1}
       - -o ${2}.bin
+  :test_compiler:
+    :executable: gcc
+    :arguments:
+      - -I"$": COLLECTION_PATHS_TEST_SUPPORT_SOURCE_INCLUDE_VENDOR
+      - -I"$": COLLECTION_PATHS_TEST_TOOLCHAIN_INCLUDE
+      - -D$:   COLLECTION_DEFINES_TEST_AND_VENDOR
+      - ${1}
+      - -DF_CPU=#{ENV['F_CPU']}
+      - -Wall
+      - -c
+      - -o ${2}
 
 :cmock:
   :mock_prefix: mock_
