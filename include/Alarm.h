@@ -22,7 +22,9 @@ void Alarm_Init(Alarm_t * alarm, Clock_Val_t duration);
 void Alarm_Start(Alarm_t * alarm);
 
 /**
- * Resets the alarm. Currently equivalent to Alarm_Start.
+ * Resets the alarm. Alarm will expire `duration` ticks from the last time it
+ * expired. If the alarm was never started, this function behaves the same as
+ * Alarm_Start.
  */
 void Alarm_Reset(Alarm_t * alarm);
 
