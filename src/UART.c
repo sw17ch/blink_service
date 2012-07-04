@@ -49,6 +49,8 @@ void UART_Start(uint32_t baud)
   UCSR0B |= _BV(TXEN0);  // Enable TX
   UCSR0B |= _BV(RXCIE0); // Enable RX Complete interrupt
   UCSR0B |= _BV(TXCIE0); // Enable TX Complete interrupt
+
+  uart_driver.running = true;
 }
 
 void UART_Stop(void)
@@ -57,6 +59,8 @@ void UART_Stop(void)
   UCSR0B &= ~_BV(TXEN0);  // Disable TX
   UCSR0B &= ~_BV(RXCIE0); // Disable RX Complete interrupt
   UCSR0B &= ~_BV(TXCIE0); // Disable TX Complete interrupt
+
+  uart_driver.running = false;
 }
 
 void UART_Wakeup(void)
