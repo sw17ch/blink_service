@@ -1,5 +1,6 @@
 #include "unity.h"
 #include "Serial.h"
+#include "Serial_Callbacks.h"
 
 #include <string.h>
 #include <stdint.h>
@@ -24,6 +25,7 @@ static bool RingBuffer_Get_Forever_Stub(RingBuffer_t * rb, uint8_t * byte, int32
 void test_Serial_Init(void)
 {
 	RingBuffer_Init_Expect(&serial.rb, serial.rb_backing, RING_BUFFER_BACKING_SIZE);
+	UART_Init_Expect(Serial_Callbacks_RX, &serial, Serial_Callbacks_TX, &serial);
   Serial_Init(&serial);
 }
 
@@ -77,6 +79,13 @@ void test_Serial_Get_retrieves_at_most_len_bytes(void)
 	TEST_ASSERT_EQUAL(4, Serial_Get(&serial, buf, sizeof(buf)));
 	TEST_ASSERT_EQUAL(4, forever_call_count);
 }
+
+void test_Serial_Callbacks_RX_counts_overflows(void)
+{
+	TEST_IGNORE_MESSAGE("implement me");
+}
+
+// Callback stubs.
 
 static bool RingBuffer_Get_Short_Stub(RingBuffer_t * rb, uint8_t * byte, int32_t numcalls)
 {
