@@ -4,6 +4,7 @@
 #include "mock_Blinker.h"
 #include "mock_Echo.h"
 #include "mock_Serial.h"
+#include "mock_UART.h"
 
 ProcessTasks_t process_tasks;
 
@@ -18,6 +19,7 @@ void tearDown(void)
 void test_ProcessTasks_Init_should_init_tasks(void)
 {
 	Serial_Init_Expect(&process_tasks.serial);
+  UART_Start_Expect(UART_BAUD_RATE);
 
 	Blinker_Init_Expect(&process_tasks.blinker);
 	Echo_Init_Expect(&process_tasks.echo);
