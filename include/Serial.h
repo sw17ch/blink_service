@@ -1,13 +1,32 @@
 #ifndef SERIAL_H
 #define SERIAL_H
 
+#include "RingBuffer.h"
+
 #include <stdint.h>
 
+#define RING_BUFFER_BACKING_SIZE (32)
+
 typedef struct {
-  uint16_t port;
+	RingBuffer_t rb;
+	uint8_t rb_backing[RING_BUFFER_BACKING_SIZE];
 } Serial_t;
 
-void Serial_Init(Serial_t * serial, uint16_t port);
-void Serial_Service(Serial_t * serial);
+/**
+ * Initializes UART0 to be the serial port.
+ */
+void Serial_Init(Serial_t * serial);
+
+/**
+ * Adds a sequence of bytes to be sent over the serial port.
+ */
+size_t Serial_Put(Serial_t * serial, uint8_t * bytes, size_t len);
+
+/**
+ * Gets a sequence of bytes from the serial port queue.
+ *
+ * Returns the number of valid bytes in `bytes`.
+ */
+size_t Serial_Get(Serial_t * serial, uint8_t * bytes, size_t len);
 
 #endif /* SERIAL_H */
