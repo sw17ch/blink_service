@@ -731,24 +731,26 @@ uint8_t TIMSK0;
 // #define TWAM6 6
 
 // #define UCSR0A _SFR_MEM8(0xC0)
-// #define MPCM0 0
-// #define U2X0 1
-// #define UPE0 2
-// #define DOR0 3
-// #define FE0 4
-// #define UDRE0 5
-// #define TXC0 6
-// #define RXC0 7
+uint8_t UCSR0A;
+#define MPCM0 0
+#define U2X0 1
+#define UPE0 2
+#define DOR0 3
+#define FE0 4
+#define UDRE0 5
+#define TXC0 6
+#define RXC0 7
 
 // #define UCSR0B _SFR_MEM8(0xC1)
-// #define TXB80 0
-// #define RXB80 1
-// #define UCSZ02 2
-// #define TXEN0 3
-// #define RXEN0 4
-// #define UDRIE0 5
-// #define TXCIE0 6
-// #define RXCIE0 7
+uint8_t UCSR0B;
+#define TXB80 0
+#define RXB80 1
+#define UCSZ02 2
+#define TXEN0 3
+#define RXEN0 4
+#define UDRIE0 5
+#define TXCIE0 6
+#define RXCIE0 7
 
 // #define UCSR0C _SFR_MEM8(0xC2)
 // #define UCPOL0 0
@@ -765,30 +767,33 @@ uint8_t TIMSK0;
 // #define UBRR0 _SFR_MEM16(0xC4)
 
 // #define UBRR0L _SFR_MEM8(0xC4)
-// #define UBRR0_0 0
-// #define UBRR0_1 1
-// #define UBRR0_2 2
-// #define UBRR0_3 3
-// #define UBRR0_4 4
-// #define UBRR0_5 5
-// #define UBRR0_6 6
-// #define UBRR0_7 7
+uint8_t UBRR0L;
+#define UBRR0_0 0
+#define UBRR0_1 1
+#define UBRR0_2 2
+#define UBRR0_3 3
+#define UBRR0_4 4
+#define UBRR0_5 5
+#define UBRR0_6 6
+#define UBRR0_7 7
 
 // #define UBRR0H _SFR_MEM8(0xC5)
-// #define UBRR0_8 0
-// #define UBRR0_9 1
-// #define UBRR0_10 2
-// #define UBRR0_11 3
+uint8_t UBRR0H;
+#define UBRR0_8 0
+#define UBRR0_9 1
+#define UBRR0_10 2
+#define UBRR0_11 3
 
 // #define UDR0 _SFR_MEM8(0xC6)
-// #define UDR0_0 0
-// #define UDR0_1 1
-// #define UDR0_2 2
-// #define UDR0_3 3
-// #define UDR0_4 4
-// #define UDR0_5 5
-// #define UDR0_6 6
-// #define UDR0_7 7
+uint8_t UDR0;
+#define UDR0_0 0
+#define UDR0_1 1
+#define UDR0_2 2
+#define UDR0_3 3
+#define UDR0_4 4
+#define UDR0_5 5
+#define UDR0_6 6
+#define UDR0_7 7
 
 
 
