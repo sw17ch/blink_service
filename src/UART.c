@@ -30,16 +30,20 @@ static void Tx_Byte(void);
 
 typedef struct {
   UART_RX_t rx_cb;
+	void * rx_param;
   UART_TX_t tx_cb;
+	void * tx_param;
   bool running;
 } UART_Driver_t;
 
 static UART_Driver_t uart_driver = { 0 };
 
-void UART_Init(UART_RX_t rx_cb, UART_TX_t tx_cb)
+void UART_Init(UART_RX_t rx_cb, void * rx_param, UART_TX_t tx_cb, void * tx_param)
 {
   uart_driver.rx_cb = rx_cb;
+	uart_driver.rx_param = rx_param;
   uart_driver.tx_cb = tx_cb;
+	uart_driver.tx_param = tx_param;
 
   UCSR0A |= _BV(U2X0); // Double USART transmission speed
 }
@@ -86,7 +90,7 @@ bool UART_IsRunning(void)
 SIGNAL(USART_RX_vect)
 {
   uint8_t c = UDR0;
-  uart_driver.rx_cb(c);
+  uart_driver.rx_cb(c, uart_driver.rx_param);
 }
 
 SIGNAL(USART_TX_vect)
@@ -98,7 +102,7 @@ SIGNAL(USART_TX_vect)
 static void Tx_Byte(void)
 {
   uint8_t c;
-  if(uart_driver.tx_cb(&c))
+  if(uart_driver.tx_cb(&c, uart_driver.tx_param))
   {
     UDR0 = c;
   }

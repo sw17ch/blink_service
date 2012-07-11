@@ -14,8 +14,11 @@
  *
  *  Param data
  *    The data that was received.
+ *
+ *  Param param
+ *		A user specified pointer to be passed to the callback.
  */
-typedef void (*UART_RX_t) (uint8_t data);
+typedef void (*UART_RX_t) (uint8_t data, void * param);
 
 /**
  * UART_TX_t
@@ -27,11 +30,14 @@ typedef void (*UART_RX_t) (uint8_t data);
  *
  *    The pointer will always point to valid data.
  *
+ *  Param param
+ *		A user specified pointer to be passed to the callback.
+ *
  *  Return
  *    True when the byte parameter points to a valid byte to be transmitted.
  *    False when the byte parameter does not point to valid data.
  */
-typedef bool (*UART_TX_t) (uint8_t * byte);
+typedef bool (*UART_TX_t) (uint8_t * byte, void * param);
 
 /**
  * UART_Init
@@ -43,7 +49,7 @@ typedef bool (*UART_TX_t) (uint8_t * byte);
  *  Param tx_cb
  *    The transmit callback to use.
  */
-void UART_Init(UART_RX_t rx_cb, UART_TX_t tx_cb);
+void UART_Init(UART_RX_t rx_cb, void * rx_param, UART_TX_t tx_cb, void * tx_param);
 
 /**
  * UART_Start
