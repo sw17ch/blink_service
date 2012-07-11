@@ -37,7 +37,7 @@ bool RingBuffer_Get(RingBuffer_t * rb, uint8_t * val)
   return true;
 }
 
-void RingBuffer_Reset(RingBuffer_t * rb)
+void RingBuffer_Flush(RingBuffer_t * rb)
 {
   rb->len = 0;
   rb->head = 0;

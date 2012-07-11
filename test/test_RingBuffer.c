@@ -120,10 +120,10 @@ void test_RingBuffer_Get_can_wrap_around(void)
   TEST_ASSERT_EQUAL('E', val);
 }
 
-void test_RingBuffer_Reset_puts_the_ring_buffer_at_its_original_state(void)
+void test_RingBuffer_Flush_empties_the_ring_buffer(void)
 {
   RingBuffer_Put(&rb, 'A');
-  RingBuffer_Reset(&rb);
+  RingBuffer_Flush(&rb);
 
   TEST_ASSERT_EQUAL(0, rb.len);
   TEST_ASSERT_EQUAL(0, rb.head);
