@@ -16,7 +16,7 @@
  *    The data that was received.
  *
  *  Param param
- *		A user specified pointer to be passed to the callback.
+ *    A user specified pointer to be passed to the callback.
  */
 typedef void (*UART_RX_t) (uint8_t data, void * param);
 
@@ -31,7 +31,7 @@ typedef void (*UART_RX_t) (uint8_t data, void * param);
  *    The pointer will always point to valid data.
  *
  *  Param param
- *		A user specified pointer to be passed to the callback.
+ *    A user specified pointer to be passed to the callback.
  *
  *  Return
  *    True when the byte parameter points to a valid byte to be transmitted.
