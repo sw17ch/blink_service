@@ -23,6 +23,11 @@
  *    Yep, it does both. Awesome.
  */
 
+#define TX_IN_PROGRESS() (UCSR0A & _BV(TXC0))
+#define TX_IDLE() (!TX_IN_PROGRESS())
+
+static void Tx_Byte(void);
+
 typedef struct {
   UART_RX_t rx_cb;
   UART_TX_t tx_cb;
@@ -65,11 +70,12 @@ void UART_Stop(void)
 
 void UART_Wakeup(void)
 {
-  uint8_t c;
-  if(uart_driver.tx_cb(&c))
-  {
-    UDR0 = c;
-  }
+	cli(); // Disable interrupts
+  if(TX_IDLE())
+	{
+		Tx_Byte();
+	}
+	sei(); // Enable interrupts
 }
 
 bool UART_IsRunning(void)
@@ -85,5 +91,15 @@ SIGNAL(USART_RX_vect)
 
 SIGNAL(USART_TX_vect)
 {
-  UART_Wakeup();
+  Tx_Byte();
+}
+
+
+static void Tx_Byte(void)
+{
+  uint8_t c;
+  if(uart_driver.tx_cb(&c))
+  {
+    UDR0 = c;
+  }
 }
