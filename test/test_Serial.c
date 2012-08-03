@@ -24,7 +24,8 @@ static bool RingBuffer_Get_Forever_Stub(RingBuffer_t * rb, uint8_t * byte, int32
 
 void test_Serial_Init(void)
 {
-	RingBuffer_Init_Expect(&serial.rb, serial.rb_backing, RING_BUFFER_BACKING_SIZE);
+	RingBuffer_Init_Expect(&serial.tx_rb, serial.tx_rb_backing, RING_BUFFER_BACKING_SIZE);
+	RingBuffer_Init_Expect(&serial.rx_rb, serial.rx_rb_backing, RING_BUFFER_BACKING_SIZE);
 	UART_Init_Expect(Serial_Callbacks_RX, &serial, Serial_Callbacks_TX, &serial);
   Serial_Init(&serial);
 }
@@ -33,9 +34,9 @@ void test_Serial_Put_sticks_bytes_in_the_ring_buffer_and_kicks_uart(void)
 {
 	uint8_t buf[] = {1,2,3};
 
-	RingBuffer_Put_ExpectAndReturn(&serial.rb, 1, true);
-	RingBuffer_Put_ExpectAndReturn(&serial.rb, 2, true);
-	RingBuffer_Put_ExpectAndReturn(&serial.rb, 3, true);
+	RingBuffer_Put_ExpectAndReturn(&serial.tx_rb, 1, true);
+	RingBuffer_Put_ExpectAndReturn(&serial.tx_rb, 2, true);
+	RingBuffer_Put_ExpectAndReturn(&serial.tx_rb, 3, true);
 
 	UART_Wakeup_Expect();
 
@@ -46,17 +47,17 @@ void test_Serial_Put_returns_bytes_unsent_and_only_calls_wakeup_if_some_bytes_we
 {
 	uint8_t buf[] = {1,2,3};
 
-	RingBuffer_Put_ExpectAndReturn(&serial.rb, 1, false);
+	RingBuffer_Put_ExpectAndReturn(&serial.tx_rb, 1, false);
 	TEST_ASSERT_EQUAL(3, Serial_Put(&serial, buf, 3));
 
-	RingBuffer_Put_ExpectAndReturn(&serial.rb, 1, true);
-	RingBuffer_Put_ExpectAndReturn(&serial.rb, 2, false);
+	RingBuffer_Put_ExpectAndReturn(&serial.tx_rb, 1, true);
+	RingBuffer_Put_ExpectAndReturn(&serial.tx_rb, 2, false);
 	UART_Wakeup_Expect();
 	TEST_ASSERT_EQUAL(2, Serial_Put(&serial, buf, 3));
 
-	RingBuffer_Put_ExpectAndReturn(&serial.rb, 1, true);
-	RingBuffer_Put_ExpectAndReturn(&serial.rb, 2, true);
-	RingBuffer_Put_ExpectAndReturn(&serial.rb, 3, true);
+	RingBuffer_Put_ExpectAndReturn(&serial.tx_rb, 1, true);
+	RingBuffer_Put_ExpectAndReturn(&serial.tx_rb, 2, true);
+	RingBuffer_Put_ExpectAndReturn(&serial.tx_rb, 3, true);
 	UART_Wakeup_Expect();
 	TEST_ASSERT_EQUAL(0, Serial_Put(&serial, buf, 3));
 }
@@ -89,7 +90,7 @@ void test_Serial_Callbacks_RX_counts_overflows(void)
 
 static bool RingBuffer_Get_Short_Stub(RingBuffer_t * rb, uint8_t * byte, int32_t numcalls)
 {
-	TEST_ASSERT_EQUAL(&serial.rb, rb);
+  TEST_ASSERT_EQUAL(&serial.rx_rb, rb);
 
 	switch(numcalls)
 	{
@@ -103,7 +104,8 @@ static bool RingBuffer_Get_Short_Stub(RingBuffer_t * rb, uint8_t * byte, int32_t
 
 static bool RingBuffer_Get_Forever_Stub(RingBuffer_t * rb, uint8_t * byte, int32_t numcalls)
 {
-	TEST_ASSERT_EQUAL(&serial.rb, rb);
+  TEST_ASSERT_EQUAL(&serial.rx_rb, rb);
+
 	forever_call_count++;
 
 	*byte = 'X';

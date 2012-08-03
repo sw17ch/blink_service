@@ -8,8 +8,10 @@
 #define RING_BUFFER_BACKING_SIZE (32)
 
 typedef struct {
-  RingBuffer_t rb;
-  uint8_t rb_backing[RING_BUFFER_BACKING_SIZE];
+  RingBuffer_t tx_rb;
+  RingBuffer_t rx_rb;
+  uint8_t tx_rb_backing[RING_BUFFER_BACKING_SIZE];
+  uint8_t rx_rb_backing[RING_BUFFER_BACKING_SIZE];
 } Serial_t;
 
 /**
