@@ -1,15 +1,39 @@
-
 require 'serialport'
 
-sp = SerialPort.new "/dev/tty.usbmodemfd1231", 115200
+$sp = SerialPort.new "/dev/tty.usbmodemfd121", 115200
+
+def ws(str)
+  print "[#{str}]"
+  $sp.write(str)
+end
+
+def rs
+  retries = 5
+  begin
+    str = $sp.read_nonblock(1024)
+    print "<#{str}>"
+  rescue Exception => ex
+    unless retries > 0
+      sleep 0.01
+      retries -= 1
+      retry
+    end
+    p ex
+  end
+end
 
 sleep 2.0
 
 ctr = 0
 
 loop do
-  sp.write ctr.to_s[-1]
+  ws("hello")
   sleep 0.5
-  print sp.getc
+  ws("hello")
+  sleep 0.5
+  ws("hello")
+  sleep 0.5
+  rs()
   ctr += 1
+  print "\n"
 end
