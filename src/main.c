@@ -6,7 +6,7 @@
 #include <avr/interrupt.h>
 #include <avr/io.h>
 
-ProcessTasks_t process_tasks;
+ProcessTasks_t process_tasks = {};
 
 int main(void)
 {
