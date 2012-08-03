@@ -57,7 +57,7 @@ void UART_Start(uint32_t baud)
   UCSR0B |= _BV(RXEN0);  // Enable RX
   UCSR0B |= _BV(TXEN0);  // Enable TX
   UCSR0B |= _BV(RXCIE0); // Enable RX Complete interrupt
-  UCSR0B |= _BV(TXCIE0); // Enable TX Complete interrupt
+  UCSR0B |= _BV(UDRIE0); // Enable TX Buffer Empty interrupt
 
   uart_driver.running = true;
 }
@@ -67,7 +67,7 @@ void UART_Stop(void)
   UCSR0B &= ~_BV(RXEN0);  // Disable RX
   UCSR0B &= ~_BV(TXEN0);  // Disable TX
   UCSR0B &= ~_BV(RXCIE0); // Disable RX Complete interrupt
-  UCSR0B &= ~_BV(TXCIE0); // Disable TX Complete interrupt
+  UCSR0B &= ~_BV(UDRIE0); // Enable TX Buffer Empty interrupt
 
   uart_driver.running = false;
 }
@@ -93,11 +93,10 @@ SIGNAL(USART_RX_vect)
   uart_driver.rx_cb(c, uart_driver.rx_param);
 }
 
-SIGNAL(USART_TX_vect)
+SIGNAL(USART_UDRE_vect)
 {
   Tx_Byte();
 }
-
 
 static void Tx_Byte(void)
 {
